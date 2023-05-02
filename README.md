@@ -36,7 +36,7 @@ The meaning of most items in the above response makes sense by default. Some mor
 
 `POST <device-ip>/api/telemetry?request=set`
 
-Some examples as payload:
+Some examples below used as payload.
 
 Set fanspeed to level 1:
 
