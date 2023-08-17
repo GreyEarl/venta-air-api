@@ -16,15 +16,14 @@
 
 <body>
 
+     <!-- Add a link to the GitHub repository -->
+    <p>GitHub repository: <a href="https://github.com/GreyEarl/venta-air-api" target="_blank">https://github.com/GreyEarl/venta-air-api </a>.</p>
     
     <h1>Venta Air Original Connect - local REST API</h1>
     <p>This is a short description for anyone who owns or wants to buy an Venta Air Original Connect humidifier and seeks integration within the local network. The manufacturers do not communicate on the use of APIs. Officially, Venta Air only offers an app which you can use to control their humidifier labeled as Original Connect. Also, contacting Venta Air for API support came out empty. They simply denied the existence of such a thing.</p>
     <p>In the end, I figured out the app is communicating by simply using a local API, which you can use within your home domotica controller, like Home Assistant. By sniffing network traffic between the app and my humidifier (type AH510), I have reverse-engineered the API.</p>
     <p>Please be aware, this might not be complete or 100% correct as there is no official description. No authentication/bearer token is required.</p>
-
-    <!-- Add a link to the GitHub repository -->
-    <p>GitHub repository: <a href="https://github.com/GreyEarl/venta-air-api" target="_blank">https://github.com/GreyEarl/venta-air-api </a>.</p>
-    
+  
     <h2>Tested with the Original Connect AH510</h2>
     <h3>Connecting to your network</h3>
     <p>Connect the device by initially using the Venta Air app. Alternatively, connect to the initial default AP. The device is hosting a webserver, so you can go to the assigned IP address in your browser to connect to your network, see basic information/state, and the option to update the firmware.</p>
