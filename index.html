@@ -1,5 +1,58 @@
 <head>
   <meta name="google-site-verification" content="3X5uNTQ26ZBuXakUhsQJmIVQg3rOOEns34x94ptsfcg" />
 
- <body>Dit is een test.</body> 
+ <body>
+
+<h1 id="venta-air-original-connect-local-rest-api">Venta Air Original Connect - local REST API</h1>
+<p>This is a short description for anyone who owns or wants to buy an Venta Air Original Connect humifidier and seeks for integration within the local network.
+The manufactures does not communicate on the use of API&#39;s. Officially Venta Air is only offering an app which you can use to control their humidifier labeled as Original Connect. Also contacting Venta Air on API support came out empty. They simply denied the existence of such thing.</p>
+<p>In the end, I figured out the app is communicating by simply using an local API, which you can use within your home domotica controller, like Home Assistant.
+By sniffing network traffic between the app and my humidifer (type AH510) I have reverse enginereed the API. </p>
+<p>Please be aware, this might not be complete or 100% correct as there is no official description.  No authentication/bearer token is required.</p>
+<h2 id="tested-with-the-original-connect-ah510">Tested with the Original Connect AH510</h2>
+<h3 id="connecting-to-your-network">Connecting to your network</h3>
+<p>Connect the device by initially using the Venta Air app. Alternatively connect to the initial default AP. The device is hosting a webserver, so you can go to the assigned IP address in your browser for connecting to your network, see basic information/state and the option to update the firmware.</p>
+<p><img src="https://user-images.githubusercontent.com/33351068/235794581-53f143c6-54ec-4ea9-8ea0-84b9d620fca2.png" alt="image"></p>
+<h3 id="get-state">Get state</h3>
+<p><code>POST &lt;device-ip&gt;/api/telemetry</code></p>
+<p>You will get something like this as response:</p>
+<p><code>{&quot;Header&quot;:{&quot;DeviceType&quot;:500,&quot;MacAdress&quot;:&quot;&lt;MAC&gt;&quot;,&quot;ProtocolV&quot;:&quot;3.0&quot;},&quot;Action&quot;:{&quot;Power&quot;:1,&quot;FanSpeed&quot;:2,&quot;TargetHum&quot;:50,&quot;SleepMode&quot;:0,&quot;Automatic&quot;:0,&quot;BaLi&quot;:10},&quot;Info&quot;:{&quot;OperationT&quot;:46571,&quot;ServiceT&quot;:367,&quot;ServiceMax&quot;:2016,&quot;Warnings&quot;:1,&quot;SWMain&quot;:&quot;1.0.0.6&quot;,&quot;HwIndexMB&quot;:1},&quot;Measure&quot;:{&quot;Temperature&quot;:25.66224,&quot;Humidity&quot;:43.41344}}</code></p>
+<p>The meaning of most items in the above response makes sense by default. Some more details on a few.</p>
+<ul>
+<li>TargetHum: Which value in humidity percentage should the device work to in automatic mode.</li>
+<li>Automatic/SleepMode: binary values, off(0) or on(1)</li>
+<li>OperationT: Operation Time</li>
+<li>Warnings: Binary value. When 1 there is an error. In most cases it indicates low water level.</li>
+<li>ServiceMax: When ServiceT hits this value, it is time to clean the device.</li>
+<li>ServiceT: When the value hits ServiceMax (by defauly 2016), the service indicator will light up on the device, meaning you have to clean the device.</li>
+</ul>
+<h3 id="set-state">Set state</h3>
+<p><code>POST &lt;device-ip&gt;/api/telemetry?request=set</code></p>
+<p>Some examples below used as payload.</p>
+<p>Set fanspeed to level 1:</p>
+<p><code>{
+    &quot;Power&quot;: 1,
+    &quot;Automatic&quot;: 0,
+    &quot;SleepMode&quot;: 0,
+    &quot;FanSpeed&quot;: 1,
+    &quot;Action&quot;: &quot;control&quot;
+}</code></p>
+<p>Set auto mode on:</p>
+<p><code>{
+    &quot;Power&quot;: 1,
+    &quot;Automatic&quot;: 1,
+    &quot;Action&quot;: &quot;control&quot;
+}</code></p>
+<p>Turn off device:</p>
+<p><code>{
+    &quot;Power&quot;: 0,
+    &quot;Automatic&quot;: 0,
+    &quot;SleepMode&quot;: 0,
+    &quot;FanSpeed&quot;: 1,
+    &quot;Action&quot;: &quot;control&quot;
+}</code></p>
+
+
+   
+ </body> 
 </head>
