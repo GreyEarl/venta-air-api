@@ -1,3 +1,5 @@
+| Warning! Venta has decided to move to Tuya for their newer devices. Devices with Tuya are not supported!
+
 # Venta Air Original Connect - local REST API
 
 This is a short description for anyone who owns or wants to buy an Venta Air Original Connect humifidier and seeks for integration within the local network.
